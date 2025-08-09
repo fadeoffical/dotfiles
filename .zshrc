@@ -67,6 +67,11 @@ if is_installed "zoxide"; then
     eval "$(zoxide init --cmd $ZOXIDE_COMMAND zsh)"
 fi
 
+if ! is_installed "oh-my-posh"; then
+    mkdir -p "$HOME/.local/bin"
+    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$HOME/.local/bin"
+fi
+
 if is_installed "oh-my-posh"; then
     eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/fade.toml")"
     alias omp="oh-my-posh"

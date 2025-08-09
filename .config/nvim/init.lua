@@ -153,9 +153,29 @@ require("lazy").setup({
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
                 callback = function()
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-                    vim.keymap.set({ "n", "x" }, "<leader>.", vim.lsp.buf.code_action)
+                    vim.keymap.set("n", "lrn", vim.lsp.buf.rename)
+                    vim.keymap.set({ "n", "x" }, "l.", vim.lsp.buf.code_action)
+                    vim.keymap.set("n", "lrf", require("telescope.builtin").lsp_references)
+                    vim.keymap.set("n", "lri", require("telescope.builtin").lsp_implementations)
+                    vim.keymap.set("n", "lrd", require("telescope.builtin").lsp_definitions)
+                    vim.keymap.set("n", "lrc", vim.lsp.buf.declaration)
+                    vim.keymap.set("n", "lS", require("telescope.builtin").lsp_document_symbols)
+                    vim.keymap.set("n", "lW", require("telescope.builtin").lsp_dynamic_workspace_symbols)
+                    vim.keymap.set("n", "lrt", require("telescope.builtin").lsp_type_definitions)
                 end
+            })
+
+            vim.diagnostic.config({
+                severity_sort = true,
+                underline = { severity = vim.diagnostic.severity.WARN },
+                signs = vim.g.have_nerd_font and {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = '󰅚 ',
+                        [vim.diagnostic.severity.WARN] = '󰀪 ',
+                        [vim.diagnostic.severity.INFO] = '󰋽 ',
+                        [vim.diagnostic.severity.HINT] = '󰌶 ',
+                    },
+                } or {},
             })
         end
     }
