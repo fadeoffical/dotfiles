@@ -11,7 +11,7 @@ export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [[ ! -d "$ZINIT_HOME" ]]; then
     if ! is_installed "git"; then
         echo "Git is not installed. Could not set up Zinit!"
-	exit 1
+    exit 1
     fi
 
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -102,3 +102,6 @@ alias l="ls -lAh"
 alias md="mkdir -p"
 alias rd="rmdir"
 
+alias cb="cargo build"
+alias cr="cargo run"
+alias ct="cargo test"
